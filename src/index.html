@@ -17,7 +17,12 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var copyButtons = document.getElementsByClassName("copyButton");
-      var clipboard = new ClipboardJS(copyButtons);
+      var clipboard = new ClipboardJS(copyButtons, {
+        text: function (trigger) {
+          // Return the text inside the button when copying
+          return trigger.textContent;
+        },
+      });
 
       clipboard.on("success", function (e) {
         console.log("Text copied: ", e.text);
@@ -30,16 +35,8 @@
     });
   </script>
 
-  <button class="copyButton" data-clipboard-target="#copyTarget1">
-    Copy Text 1
-  </button>
-  <button class="copyButton" data-clipboard-target="#copyTarget2">
-    Copy Text 2
-  </button>
-  <div id="copyTarget1">Text to be copied 1</div>
-  <div id="copyTarget2">Text to be copied 2</div>
+  <button class="copyButton">Copy me!</button>
   <!-- END: Add clipboard support for text in elements -->
-
 
   <div>
     <button id="list" onclick="list()">List</button>
