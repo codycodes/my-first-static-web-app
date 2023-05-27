@@ -13,9 +13,11 @@
   </blockquote>
 
   <!-- START: Add clipboard support for text in elements -->
+  <div id="javascriptButtons"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    function createClipboardFromElements() {
       var copyButtons = document.getElementsByClassName("copyButton");
       var clipboard = new ClipboardJS(copyButtons, {
         text: function (trigger) {
@@ -32,7 +34,27 @@
       clipboard.on("error", function (e) {
         console.error("Copy failed:", e.action);
       });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      createClipboardFromElements();
     });
+
+    // Create buttons from javascript
+    function createButton(innerHTML, containerId) {
+      var button = document.createElement("button");
+
+      // Add class name to the button
+      button.className = "copyButton";
+
+      // Set button text
+      button.innerHTML = innerHTML;
+
+      console.log(button, containerId);
+
+      // Append the button to a container element in the HTML document
+      var container = document.getElementById(containerId);
+    }
   </script>
 
   <button class="copyButton">Copy me!</button>
@@ -66,6 +88,11 @@
       });
       const result = await response.json();
       console.table(result.data.people.items);
+      // Create buttons from data
+      result.data.people.items.forEach((Person) => {
+        createButton(Person.Name, "javascriptButtons");
+      });
+      createClipboardFromElements();
     }
 
     async function get() {
