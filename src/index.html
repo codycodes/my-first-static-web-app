@@ -39,8 +39,8 @@
   <script>
     function createDatatable() {
       $("#example").DataTable({
-        "pageLength": -1, // Show all records by default
-        "lengthChange": false, // Remove the "Show entries" option
+        pageLength: -1, // Show all records by default
+        lengthChange: false, // Remove the "Show entries" option
       });
     }
   </script>
@@ -79,7 +79,12 @@
       var button = document.createElement("button");
 
       // Add class name to the button
-      button.className = "copyButton";
+      button.className = "copyButton btn btn-outline-light btn-lg";
+
+      button.style = `
+      white-space: nowrap;
+      overflow: hidden;
+      `;
 
       // Set button text
       button.innerHTML = innerHTML;
