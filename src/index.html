@@ -66,9 +66,17 @@
     function createTableRow(values, additionalElement) {
       // Takes a dynamic array of values to create a table from
       // Can additionally take an HTML element for an action
+      // which will be prepended to the row
 
       // Create a new table row
       var newRow = document.createElement("tr");
+
+      // Append the additional HTML element to the row
+      if (additionalElement) {
+        var additionalCell = document.createElement("td");
+        additionalCell.appendChild(additionalElement);
+        newRow.appendChild(additionalCell);
+      }
 
       // Create table cells for each value
       for (var i = 0; i < values.length; i++) {
@@ -77,12 +85,6 @@
         newRow.appendChild(cell);
       }
 
-      // Append the additional HTML element to the row
-      if (additionalElement) {
-        var additionalCell = document.createElement("td");
-        additionalCell.appendChild(additionalElement);
-        newRow.appendChild(additionalCell);
-      }
       return newRow;
     }
 
