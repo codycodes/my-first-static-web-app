@@ -22,8 +22,7 @@
         <th>Name</th>
       </tr>
     </thead>
-    <tbody id="tableBody">
-    </tbody>
+    <tbody id="tableBody"></tbody>
   </table>
 
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
@@ -62,6 +61,19 @@
       button.innerHTML = innerHTML;
 
       return button;
+    }
+
+    function createTableRow(values) {
+      // Create a new table row
+      var newRow = document.createElement("tr");
+
+      // Create table cells for each value
+      for (var i = 0; i < values.length; i++) {
+        var cell = document.createElement("td");
+        cell.textContent = values[i];
+        newRow.appendChild(cell);
+      }
+      return newRow;
     }
 
     function appendHTMLToDoc(html, containerId) {
@@ -105,7 +117,10 @@
       // Create buttons from data
       result.data.people.items.forEach((Person) => {
         let button = createButton(Person.Name);
-        appendHTMLToDoc(button, "javascriptButtons")
+        appendHTMLToDoc(button, "javascriptButtons");
+        let tableRowData = [Person.id, button]
+        let tableRow = createTableRow(tableRowData)
+        appendHTMLToDoc(tableRow, "tableBody");
       });
       createClipboardFromElements();
     }
