@@ -30,7 +30,7 @@
       "source": "MyTestPersonContainer",
       "permissions": [
         {
-          "actions": ["*"],
+          "actions": ["read"],
           "role": "anonymous"
         }
       ]
