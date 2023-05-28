@@ -11,11 +11,12 @@
   <blockquote>
     Open the console in the browser developer tools to see the API responses.
   </blockquote>
-
-  <!-- START: Add clipboard support for text in elements -->
-  <div id="javascriptButtons"></div>
-
-  <table>
+  
+  <!-- START: Add datatables support -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"></script>
+  <table id="example">
     <thead>
       <tr>
         <th>ID (Click to Copy)</th>
@@ -24,6 +25,15 @@
     </thead>
     <tbody id="tableBody"></tbody>
   </table>
+  <script>
+    function createDatatable() {
+      $("#example").DataTable();
+    }
+  </script>
+  <!-- END: Add datatables support -->
+
+  <!-- START: Add clipboard support for text in elements -->
+  <div id="javascriptButtons"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
   <script>
@@ -128,13 +138,14 @@
       console.table(result.data.people.items);
       // Create buttons from data
       result.data.people.items.forEach((Person) => {
-        let button = createButton(Person.Name);
+        let button = createButton(Person.id);
         appendHTMLToDoc(button, "javascriptButtons");
-        let tableRowData = [Person.id];
+        let tableRowData = [Person.Name];
         let tableRow = createTableRow(tableRowData, button);
         appendHTMLToDoc(tableRow, "tableBody");
       });
       createClipboardFromElements();
+      createDatatable();
     }
 
     async function get() {
