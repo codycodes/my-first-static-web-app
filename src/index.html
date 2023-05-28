@@ -29,7 +29,7 @@
     <table id="example" class="table align-middle table-striped table-dark">
       <thead>
         <tr>
-          <th>ID (Click to Copy)</th>
+          <th>ID</th>
           <th>Name</th>
         </tr>
       </thead>
@@ -38,7 +38,10 @@
   </div>
   <script>
     function createDatatable() {
-      $("#example").DataTable();
+      $("#example").DataTable({
+        "pageLength": -1, // Show all records by default
+        "lengthChange": false, // Remove the "Show entries" option
+      });
     }
   </script>
   <!-- END: Add datatables support -->
