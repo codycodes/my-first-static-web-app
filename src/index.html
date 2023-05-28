@@ -286,5 +286,10 @@
       const result = await response.json();
       console.log(`Record deleted: ${JSON.stringify(result.data)}`);
     }
+
+    // Load all records on init:
+    $(document).ready(function () {
+      list();
+    });
   </script>
 </html>
